@@ -1,0 +1,33 @@
+set -g prefix C-s
+
+bind-key -r i run-shell "tmux neww ~/.dotfiles/cht.sh "
+
+bind-key -r e run-shell "tmux neww ~/.dotfiles/easy-dir.sh"
+bind-key -r m run-shell "tmux neww ~/.dotfiles/easy-mark.sh"
+
+
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'sainnhe/tmux-fzf'
+set -g @plugin 'thuantanphamfilms/tmux-fzf-session-switch'
+
+bind-key h select-pane -L
+bind-key j select-pane -D
+bind-key k select-pane -U
+bind-key l select-pane -R
+
+setw -g mode-keys vi
+set -g mouse
+
+
+set-window-option -g mode-keys vi
+
+bind P paste-buffer
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+bind-key -T copy-mode-vi y send-keys -X copy-selection
+bind-key -T copy-mode-vi r send-keys -X rectangle-toggle
+
+unbind r
+
+run '~/.tmux/plugins/tpm/tpm'
+bind r source-file ~/.tmux.conf ; display-message "Reloaded...""
+
